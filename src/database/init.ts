@@ -1,16 +1,17 @@
-import { sequelize } from './sequelize';
-import { User } from '../models/User';
 import * as hashJS from "hash.js";
+import { connectDB, conn } from './mongo';
+import { Db } from 'mongodb';
 
-export const init = async (options?: { force?: boolean, test?: boolean }) => {
-    const db = sequelize(options?.test ? { dialect: 'sqlite', storage: ':memory:' } : undefined);
-    await db.sync({ force: options?.force });
+export let db: Db;
 
+export const init = async (options?: { test?: boolean }) => {
+    await connectDB();
+    db = conn.db(options?.test ? 'test' : 'example');
     options?.test && await populate();
 };
 
 const populate = async () => {
-    await User.create({
+    db.collection('users').insertOne({
         username: 'superAdmin',
         role: 'admin',
         email: 'admin@mail.com',

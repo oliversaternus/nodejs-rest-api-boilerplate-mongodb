@@ -1,10 +1,13 @@
 import { test as initTestServer } from '../../src/app';
 import { invokeApi, initApi } from '../utils';
 import { Server } from 'http';
+import { MongoClient } from 'mongodb';
+import { conn } from '../../src/database/mongo';
 
 let state: {
     server: Server;
     baseUrl: string;
+    conn: MongoClient;
 };
 
 beforeAll(async (done) => {
@@ -15,6 +18,7 @@ beforeAll(async (done) => {
 
 afterAll(async (done) => {
     state.server.close();
+    conn.close();
     done();
 });
 

@@ -27,14 +27,13 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongodb": "^3.5.25",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "hash.js": "^1.1.7",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.9",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^5.15.1",
-    "sequelize-typescript": "^1.0.0-alpha.9",
-    "sqlite3": "^5.0.0",
     "strong-error-handler": "^3.2.0"
   }
 }

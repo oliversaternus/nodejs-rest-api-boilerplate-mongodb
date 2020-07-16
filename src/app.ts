@@ -3,6 +3,7 @@ import * as strongErrorHandler from 'strong-error-handler';
 import { json } from 'body-parser';
 import { createServer, Server } from 'http';
 import { init } from './database/init';
+import { conn } from './database/mongo';
 
 import { userRouterFactory } from './controllers/userRouterFactory';
 import { postRouterFactory } from './controllers/postRouterFactory';
@@ -41,8 +42,8 @@ export const start = async () => {
 
 export const test = async () => {
   const port = process.env.PORT || 5050;
-  await init({ force: true, test: true });
+  await init({ test: true });
   const server = await listen(port);
 
-  return { server, baseUrl: `http://localhost:${port}` };
+  return { server, baseUrl: `http://localhost:${port}`, conn };
 }
